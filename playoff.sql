@@ -1,0 +1,3 @@
+INSERT INTO playoff VALUES(7211,'13.4.04',13,25,98,113,'Si',48,15,22,21,26,3,9,21,22,'Cuartos','Oeste');
+INSERT INTO playoff VALUES(7213,'13.4.04',17,19,108,93,'Si',48,19,16,17,16,2,2,20,23,'Cuartos','Este');
+INSERT INTO playoff VALUES(7303,'21.5.04',25,17,105,103,'Si',48,25,20,22,17,6,4,24,22,'Finals','Final');

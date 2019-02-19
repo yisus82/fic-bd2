@@ -1,0 +1,1376 @@
+RESPUESTA 1
+
+$ sqlplus /
+$ sqlplus [username[/password]] [@filename]
+
+RESPUESTA 2
+
+Comandos SQL*Plus: Uno por fila.
+Sentencias SQL: Multifila y acaban en ;
+
+RESPUESTA 3
+
+DESC[RIBE] tabla
+
+RESPUESTA 4
+
+SELECT *
+FROM emp
+-- Obsérvese la incómoda visualización. Lo corregiremos a continuación.
+
+RESPUESTA 5
+
+Un ejemplo:
+
+$ cat  login.sql
+def_editor=vi
+set pages 50
+set feed 1
+column empno  format  9990
+column mgr    format  9990
+column sal    format  99,990
+column comm   format  99,990
+column deptno format  90
+
+RESPUESTA 6
+
+SELECT empno, ename, sal, deptno
+FROM   emp a
+WHERE  sal = (SELECT MIN(sal)
+              FROM   emp
+              WHERE  deptno = a.deptno)
+-- Después de introducir esta sentencia SQL usaremos en el 
+-- ejercicio siguiente comandos SQL*Plus para modificarla, 
+-- cambiar una línea, etc.
+
+RESPUESTA 7
+
+SQL*Plus usa un buffer para almacenar la última sentencia SQL ejecutada
+(no afecta a los comandos SQL). Incorpora un editor de líneas elemental
+para realizar cambios mínimos en esa sentencia SQL, como visualizarla
+(LIST), posicionarse en una determinada línea (n), etc.
+
+Además hay otros comandos SQL*Plus muy útiles
+L[IST] [n [m]]            Visualiza líneas del buffer
+A[PPEND] texto            Añade texto al final de la línea
+C[HANGE] /viejo/nuevo/    Cambia una cadena de caracteres por otra
+C[HANGE] /texto/          Una forma de "cambiarla"   
+CL[EAR] BUFF[ER]          Elimina los datos del buffer
+DEL    [n [m]]            Suprime líneas 
+I[NPUT] [texto]           Añade una línea nueva despues de la "actual"
+R[UN]                     Ejecuta lo almacenado en el buffer
+/                         Ejecuta lo almacenado en el buffer
+n                         Nos posiciona en una línea del buffer
+n texto                   Introduce una línea con "texto" como contenido
+                          antes de la línea "n".
+0 texto                   Lo mismo, pero antes de la primera línea.
+SAV[E] fichero[.sql]      Almacena el buffer en un fichero
+GET fichero[.sql]         Pasa al buffer un fichero
+STA[RT] fichero[.sql]     Ejecuta un fichero [.sql]
+@fichero[.sql]            Idem
+ED[IT] fichero[.sql]      Edita un fichero [.sql]
+SPO[OL] [fichero[.lst]]   Define un fichero de registro de sesión
+SPO[OL] {OFF/OUT}         Finaliza el registro de la sesión
+HELP [tema]               Ayuda elemental sobre algunos temas
+HO[ST] comando            Ejecuta un comando del sistema operativo
+
+RESPUESTA 8
+
+Revisa los anteriores para determinar las tres acciones a realizar
+
+RESPUESTA 9
+
+SELECT empno AS Codigo,
+         ename || ' ' || 'trabaja de ' || ' ' || job  "Nombre y empleo"
+FROM     emp
+
+RESPUESTA 10
+
+SELECT empno AS Codigo,
+         ename || ' ' || 'trabaja de ' || ' ' || job  "Nombre y empleo"
+FROM     emp
+ORDER BY Codigo DESC;
+
+SELECT empno AS Codigo,
+         ename || ' ' || 'trabaja de ' || ' ' || job  "Nombre y empleo"
+FROM     emp
+ORDER BY 1 DESC;
+
+RESPUESTA 11
+
+SELECT empno AS Codigo,
+         ename || ' ' || 'trabaja de ' || ' ' || job  "Nombre y empleo"
+FROM     emp
+ORDER BY deptno;
+-- no habitual en otros SGBD
+
+RESPUESTA 12
+
+SELECT empno AS Codigo,
+         ename || ' ' || 'trabaja de ' || ' ' || job  "Nombre y empleo", deptno "Depart."
+FROM     emp
+ORDER BY deptno;
+
+RESPUESTA 13
+
+SELECT empno, ename, sal, comm, sal + comm  
+FROM   emp  -- comentario en una linea
+/*  Vemos la aritmetica de 
+los valores nulos  */
+WHERE  sal > 1000 
+
+RESPUESTA 14
+
+SELECT empno, ename, sal, comm, sal + comm
+FROM   emp
+WHERE  sal > 1000
+AND    comm IS NOT NULL
+UNION
+SELECT empno, ename, sal, comm, sal
+FROM   emp
+WHERE  sal > 1000
+AND    comm IS NULL
+
+-- Con la funcion Oracle  NVL
+SELECT empno, ename, sal, comm, sal + NVL(comm,0)
+FROM   emp  
+WHERE  sal > 1000 
+
+-- NVL: Función de Oracle. Asigna un valor dado (aquí 0)
+-- al dato indicado (aquí comm), cuando éste es NULL.
+
+RESPUESTA 15
+
+desc  emp
+desc dept
+
+RESPUESTA 16
+
+SELECT deptno
+FROM   emp;
+
+SELECT DISTINCT deptno
+FROM   emp;    
+
+RESPUESTA 17
+
+SELECT empno, ename, mgr, a.deptno, dname, loc
+FROM   emp a, dept
+
+RESPUESTA 18
+
+SELECT empno, ename, sal, a.deptno, loc
+FROM   emp a, dept b
+WHERE  a.deptno = b.deptno
+
+SELECT empno, ename, sal, a.deptno, loc
+FROM   emp a INNER JOIN  dept b
+  ON   a.deptno = b.deptno
+
+SELECT empno, ename, sal, a.deptno, loc
+FROM   emp a       JOIN  dept b
+  ON   a.deptno = b.deptno
+
+RESPUESTA 19
+
+SELECT empno, ename, sal, a.deptno, loc
+FROM   emp a, dept b
+WHERE  a.deptno = b.deptno
+AND    SUBSTR(ename,1,1) = 'J'
+
+SELECT empno, ename, sal, a.deptno, loc
+FROM   emp a   JOIN  dept b
+  ON   a.deptno = b.deptno
+WHERE  SUBSTR(ename,1,1) = 'J'
+
+SELECT empno, ename, sal, a.deptno, loc
+FROM   emp a   JOIN  dept b
+  ON   a.deptno = b.deptno
+WHERE  INITCAP(ename) LIKE 'J%'
+
+-- Funciones de interes:
+-- INITCAP('MIs fIcherOs')  Mis Ficheros
+-- UPPER('MIs fIcherOs')    MIS FICHEROS
+-- LOWER('MIs fIcherOs')    mis ficheros
+-- SUBSTR('Cadena',2,3)     ade         
+
+RESPUESTA 20
+
+SELECT   a.ename, a.job, a.sal, b.ename, b.job, b.sal
+FROM     emp a, emp b
+WHERE    a.sal > b.sal 
+AND      b.ename = 'ALLEN'
+-- ejemplo de non equijoin
+
+SELECT   a.ename, a.job, a.sal, b.ename, b.job, b.sal
+FROM     emp a  JOIN  emp b
+  ON     a.sal > b.sal 
+WHERE    b.ename = 'ALLEN'
+SELECT e.empno, e.ename, m.empno cdg_mng, m.ename mng
+FROM   emp e, emp m
+WHERE  e.mgr = m.empno
+-- Oracle suele denominar a esto un self join
+
+RESPUESTA 21
+
+SELECT e.empno, e.ename, m.empno cdg_mng, m.ename mng
+FROM   emp e   JOIN  emp m
+  ON   e.mgr = m.empno
+
+RESPUESTA 22
+
+SELECT empno, ename, d.deptno, d.dname
+FROM   emp e, dept d
+WHERE  e.deptno (+) = d.deptno
+ORDER  by d.deptno
+-- forma de realizar un outer join sobre Oracle
+-- siempre despues de la tabla que necesita "mas" filas 
+-- aqui seria la de empleados
+
+-- otra forma de poner lo mismo
+SELECT empno, ename, d.deptno, d.dname
+FROM   dept d, emp e
+WHERE  d.deptno = e.deptno (+)
+ORDER  by d.deptno
+
+SELECT empno, ename, d.deptno, d.dname
+FROM   emp e  RIGHT OUTER JOIN dept d
+  ON   e.deptno  = d.deptno
+ORDER  by d.deptno
+
+-- Si no conocemos los datos de las filas,
+-- que sería lo habitual
+SELECT empno, ename, d.deptno, d.dname
+FROM   emp e  FULL  OUTER JOIN dept d
+  ON   e.deptno  = d.deptno
+ORDER  by d.deptno
+
+SELECT empno, ename, d.deptno, d.dname
+FROM   emp e  FULL        JOIN dept d
+  ON   e.deptno  = d.deptno
+ORDER  by d.deptno
+
+RESPUESTA 23
+
+SELECT   mgr, MAX(sal), MIN(sal)
+FROM     emp
+WHERE    mgr IS NOT NULL
+GROUP BY mgr
+HAVING   MIN(sal) > 1000
+
+RESPUESTA 24
+
+SELECT empno, ename, sal, deptno
+FROM   emp a
+WHERE  sal > (SELECT AVG(sal)
+              FROM   emp)
+-- subconsulta no sincronizada
+
+RESPUESTA 25
+
+SELECT empno, ename, sal, deptno
+FROM   emp a
+WHERE  sal = (SELECT MAX(sal)
+              FROM   emp
+              WHERE  deptno = a.deptno)
+-- subconsulta sincronizada o correlacionada con el caso particular
+-- de que la subconsulta recorre la misma tabla que la consulta principal
+
+RESPUESTA 26
+
+SELECT empno, ename, sal , comm
+FROM   emp
+WHERE  empno IN (SELECT mgr
+                 FROM   emp)
+
+RESPUESTA 27
+
+SELECT empno, ename, sal, comm
+FROM   emp
+WHERE  empno NOT IN  (SELECT mgr
+                      FROM   emp
+                      WHERE  mgr IS NOT NULL)
+-- por que es necesario el WHERE de la subconsulta?
+
+
+RESPUESTA 28
+                      
+SELECT deptno, dname, loc
+FROM   dept a
+WHERE  NOT EXISTS (SELECT *
+                   FROM   emp
+                   WHERE  deptno = a.deptno)
+
+Subconsulta con posibilidad de que no obtenga ninguna fila
+entonces se usa un predicado de existencia y se permite
+el SELECT * en la subconsulta.
+
+Determina si podría usarse:
+
+SELECT deptno, dname, loc
+FROM   dept 
+WHERE  deptno NOT IN (SELECT deptno
+                      FROM   emp)
+
+RESPUESTA 29
+
+SELECT   empno, ename, job, sal, comm
+FROM     emp
+WHERE    sal > ANY (SELECT sal
+                    FROM   emp
+                    WHERE  job = 'SALESMAN')
+ORDER BY sal
+
+-- Es lo mismo usar ANY que SOME
+--
+-- otra posibilidad
+SELECT   empno, ename, job, sal, comm
+FROM     emp
+WHERE    sal >   (SELECT MIN(sal)
+                  FROM   emp
+                  WHERE  job = 'SALESMAN')
+ORDER BY sal
+
+RESPUESTA 30
+
+SELECT   empno, ename, job, sal, comm
+FROM     emp
+WHERE    sal > ALL (SELECT sal
+                    FROM   emp
+                    WHERE  job = 'SALESMAN')
+ORDER BY sal
+
+-- otra posibilidad
+SELECT   empno, ename, job, sal, comm
+FROM     emp
+WHERE    sal >   (SELECT MAX(sal)
+                  FROM   emp
+                  WHERE  job = 'SALESMAN')
+ORDER BY sal
+
+RESPUESTA 31
+
+SELECT a.deptno, a.dname , AVG(sal) Media
+FROM   dept  a  JOIN  emp b
+  ON   a.deptno = b.deptno
+GROUP  BY a.deptno, a.dname
+HAVING AVG(sal) = ( SELECT MAX(AVG(sal))
+                    FROM   emp
+                    GROUP BY deptno)
+
+RESPUESTA 32
+
+SELECT * 
+FROM   USER_TABLES
+
+
+RESPUESTA 33
+
+SELECT * 
+FROM   TAB
+
+RESPUESTA 34
+
+CREATE TABLE emp3
+  AS SELECT *
+     FROM   emp
+
+RESPUESTA 35
+
+SELECT * 
+FROM   TAB;
+
+DESC emp3
+
+SELECT *
+FROM   emp3;
+
+RESPUESTA 36
+
+INSERT INTO emp3
+VALUES (7777,'GARCIA','ANALYST',7566,'12/01/81',1600,NULL,20);
+
+INSERT INTO emp3
+VALUES (8888,'GOMEZ','CLERK',7566,'12/01/81',950,NULL,20);
+
+RESPUESTA 37
+
+SELECT *
+FROM emp3;
+
+RESPUESTA 38
+
+SELECT *
+FROM   emp
+WHERE  sal > 1600
+
+RESPUESTA 39
+
+SELECT *
+FROM   emp
+WHERE  sal > 1600
+UNION 
+SELECT *
+FROM   emp
+WHERE  sal > 1500
+ORDER BY 1
+
+-- El ORDER BY afecta a todo el conjunto
+
+RESPUESTA 40
+
+SELECT *
+FROM   emp
+WHERE  sal > 1600
+UNION ALL
+SELECT *
+FROM   emp
+WHERE  sal > 1500
+ORDER BY 1
+
+RESPUESTA 41
+
+CREATE TABLE emp4
+   (empno NUMBER(4) NOT NULL,
+    ename VARCHAR2(15) ,
+    job   VARCHAR2(10),
+    sal   NUMBER(7,2) NOT NULL,
+    comm  NUMBER(7,2));
+    
+DESC emp4
+
+SELECT *
+FROM   emp4;
+
+SELECT * 
+FROM   TAB
+
+RESPUESTA 42
+
+INSERT INTO tabla [ columna (, columna ...) ]
+{ VALUES  ( valor [, valor ...]) / subconsulta }
+
+INSERT INTO emp4
+VALUES (7777,'GARCIA','ANALISTA',1600,300);
+
+SELECT *
+FROM   emp4;
+
+-- Añadiendo valores a todos los atributos de la tabla
+
+RESPUESTA 43
+
+INSERT INTO emp4 (empno, ename, comm)
+VALUES (7778,'GOMEZ',100);
+?    
+
+RESPUESTA 44
+
+INSERT INTO emp4 (empno, ename, sal, comm)
+VALUES (7778,'GOMEZ',1500,100);
+
+RESPUESTA 45
+
+INSERT INTO emp4 (empno, ename, sal, comm)
+VALUES (7779,'GOMEZ',1000,NULL);
+
+-- INSERT en este formato sólo permite una fila de cada vez
+
+INSERT INTO emp4 (empno, ename, sal, comm)
+VALUES (7780,'Gil',2000,90);
+
+RESPUESTA 46
+
+INSERT INTO emp4 
+    SELECT empno, ename, job, sal, comm
+    FROM   emp
+    WHERE  deptno = 30;
+
+RESPUESTA 47
+
+INSERT INTO emp4 (empno, ename, sal)
+    SELECT empno, ename, sal
+    FROM   emp
+    WHERE  deptno = 20;
+
+RESPUESTA 48
+
+UPDATE tabla
+SET   columna = expresion [ , columna = expresion , ... ] 
+[ WHERE condición ]
+
+UPDATE emp4
+  SET  sal = sal + 100;
+
+-- Provoca una actualización de todas las filas    
+
+RESPUESTA 49
+
+UPDATE emp4
+  SET  comm = 110
+  WHERE comm IS NULL;
+
+RESPUESTA 50
+
+UPDATE emp4
+  SET  sal = sal + 200, comm = comm + 20
+  WHERE empno NOT IN (SELECT empno FROM emp WHERE deptno=30);
+
+RESPUESTA 51
+
+DELETE FROM tabla
+[ WHERE condición ]
+
+DELETE FROM emp4
+  WHERE sal > 2500;
+
+-- Borrado de las filas que cumplen una condición.
+
+RESPUESTA 52
+
+DELETE FROM emp4
+  WHERE empno IN (SELECT empno FROM emp WHERE deptno=30);
+
+RESPUESTA 53
+ 
+DELETE FROM emp4;
+
+-- Borrado de todas las filas de la tabla !!.
+
+RESPUESTA 54
+
+SELECT * 
+FROM   TAB;
+    
+DESC emp4
+
+SELECT *
+FROM   emp4;
+
+RESPUESTA 55
+
+SELECT * 
+FROM   TAB
+
+RESPUESTA 56
+
+CREATE TABLE emp5 (
+  empno   NUMBER(4),
+  ename   VARCHAR2(10),
+  mgr     NUMBER(4),
+  deptno  NUMBER(2) );
+
+SELECT *
+FROM    emp5;
+
+RESPUESTA 57
+
+DROP TABLE emp5;
+
+RESPUESTA 58
+
+CREATE TABLE emp5
+  (cdgem, nome, supervisor, cdgdp)
+  AS  (SELECT  empno, ename, mgr, deptno 
+       FROM    emp);
+
+RESPUESTA 59
+
+ALTER TABLE emp5
+  ADD (posto VARCHAR2(9) ); 
+
+-- En el estándar:
+ALTER TABLE emp5
+  ADD [COLUMN] (posto VARCHAR2(9) );
+
+RESPUESTA 60
+
+ALTER TABLE emp5
+  ADD (sal NUMBER(7,2) DEFAULT 1500);
+ 
+RESPUESTA 61
+ 
+ALTER TABLE emp5
+  MODIFY  (cdgdp VARCHAR2(2));
+
+-- Pero necesita que no haya valores en esa columna ...
+
+UPDATE emp5
+SET cdgdp = NULL;
+
+RESPUESTA 62
+
+ALTER TABLE emp5
+  RENAME COLUMN sal  TO salario;
+
+RESPUESTA 63
+
+ALTER TABLE emp5
+  DROP COLUMN posto;
+
+RESPUESTA 64
+
+ALTER TABLE emp5
+   DROP (nome, supervisor);
+
+RESPUESTA 65
+
+CREATE TABLE emp1
+   AS (SELECT *
+       FROM   emp);
+
+RESPUESTA 66
+
+INSERT INTO emp1 (empno, ename, sal, deptno)
+VALUES (8888,'MANOLO''S',1500,10);
+
+RESPUESTA 67
+
+SELECT *
+FROM   emp1
+WHERE  ename LIKE '%''%';
+
+RESPUESTA 68
+
+INSERT INTO emp1 (empno, ename, sal, deptno)
+VALUES (9999,'ARK''''S',1600,20);
+
+RESPUESTA 69
+
+SELECT *
+FROM   emp1
+WHERE  ename LIKE '%''''%';
+
+RESPUESTA 70
+
+INSERT INTO emp1 (empno, ename, sal, deptno)
+VALUES (1111,'A''nn mm''',1600,20);
+
+RESPUESTA 71
+
+INSERT INTO emp1 (empno, ename, sal, DEPTNO)
+VALUES(9000,'MACA%ENA',1000,20);
+
+RESPUESTA 72
+
+INSERT INTO emp1 (empno, ename, sal, DEPTNO)
+VALUES(9900,'IRE%E',1000,20);
+
+RESPUESTA 73
+
+-- Puede usarse cualquier carácter como protector del siguiente
+-- indicándolo tras ESCAPE:
+SELECT *
+FROM emp1
+WHERE ename LIKE '%a%%' ESCAPE 'a';
+
+RESPUESTA 74
+
+SELECT *
+FROM emp1
+WHERE ename LIKE '%MM%M%%' ESCAPE 'M';
+
+RESPUESTA 75
+
+SELECT POWER(9,2), SYSDATE
+FROM DUAL;
+
+POWER(5,2) SYSDATE
+---------- --------
+        25 26/05/04
+
+1 fila seleccionada.
+
+RESPUESTA 76
+
+CREATE TABLE kk22
+ (cdemp NUMBER NOT NULL,
+  ename VARCHAR(10));
+
+RESPUESTA 77
+
+CREATE SEQUENCE sqemp
+  INCREMENT BY 1 START WITH 100;
+
+-- Se accede a los valores de la secuencia mediante:
+-- sqemp.CURRVAL   Devuelve el valor actual de la secuencia.
+-- sqemp.NEXTVAL   Incrementa el valor de la secuencia, y devuelve
+--                 el nuevo resultado.
+
+RSPUESTA 78
+
+INSERT INTO kk22 VALUES (sqemp.NEXTVAL,'Manolo');
+INSERT INTO kk22 VALUES (sqemp.NEXTVAL,'Juan');
+INSERT INTO kk22 VALUES (sqemp.NEXTVAL,'Pepe');
+
+RESPUESTA 79
+
+DELETE FROM kk22
+WHERE cdemp = 101;
+
+RESPUESTA 80
+
+INSERT INTO kk22 VALUES (sqemp.NEXTVAL,'Luz');
+
+RESPUESTA 81
+
+DELETE FROM kk22
+WHERE ename = 'Luz';
+
+INSERT INTO kk22 VALUES (sqemp.NEXTVAL,'Liz');
+
+RESPUESTA 82
+
+SELECT sqemp.currval
+FROM DUAL
+
+   CURRVAL
+----------
+       104
+
+Normalmente no se usan ni CURRVAL ni  NEXTVAL en las consultas, y
+además no pueden aparecer en SELECT que tengan algunas propiedades.
+
+RESPUESTA 83
+
+CREATE TABLE kk23
+( c1 VARCHAR(10),
+  c2 CHAR(5));
+
+INSERT INTO kk23 VALUES(sqemp.NEXTVAL,'Proba');
+
+RESPUESTA 84
+
+INSERT INTO kk23 VALUES(sqemp.CURRVAL,'Duas');
+
+RESPUESTA 85
+
+SELECT sqemp.NEXTVAL FROM DUAL;
+ALTER SEQUENCE sqemp INCREMENT BY 4;
+SELECT sqemp.NEXTVAL FROM DUAL;
+SELECT sqemp.NEXTVAL FROM DUAL;
+
+RESPUESTA 86
+
+BASES DE DATOS 2                       Ingenieria Informatica-Cuarto Curso           
+Profesor: Luis A. Glez. Ares                     Curso Academico 2003-2004
+--------------------------------------------------------------------------
+                            (Fichero sin acentos para facilitar su lectura
+                             en distintas plataformas)
+
+
+EJEMPLOS DE SQL*Loader
+----------------------
+
+Estos son dos ejemplos elementales de utilizacion del SQL*Loader,
+pero son suficientes para la introduccion de la gran mayoria de los datos.
+Hay otras opciones y posibilidades, pero habra que consultar el manual
+para su correcta utilizacion (Oracle9i Database Utilities).
+En el examen entra SQL*Loader, pero solo con el grado de dificultad
+expuesto en estos ejemplos.
+
+
+Creamos una tabla de prueba:
+
+SQL> CREATE TABLE p1
+     ( cd     CHAR(3),
+       nme    CHAR(10),
+       sal    NUMBER,
+       dia    DATE);
+
+cuya descripcion es:
+
+SQL> desc p1
+ Name                            Null?    Type
+ ------------------------------- -------- ----
+ CD                                       CHAR(3)
+ NME                                      CHAR(10)
+ SAL                                      NUMBER
+ DIA                                      DATE
+
+
+
+Ejemplo 1
+---------
+
+- Los datos que queremos introducir estan en el fichero p1.dat
+que tiene solo las cuatro filas que aparecen bajo los guiones:
+
+123456789012345678901234
+------------------------
+101 fila 1     50 980423
+102 fila 2     51 980424
+103            52 980425
+104 fila 4        980426
+
+
+- El fichero de control que usamos es p1.ctl que es el siguiente:
+
+load data
+infile 'p1.dat'
+into table p1
+(cd   position(1:3)   char,
+ nme  position(5:14)  char,
+ sal  position(15:17) integer external,
+ dia  position(19:24) date 'YYMMDD')
+
+
+- Ejecutamos el SQL*Loader:
+
+$ sqlldr  /  control=p1
+
+- Siempre comprobaremos el fichero de log (aqui: p1.log).
+
+- Realizamos una llamada desde el operativo a sqlplus:
+
+$ sqlplus / @p1
+
+- Con esto ejecutamos el fichero p1.sql que contiene:
+
+select *
+from p1;
+exit
+
+- Y obtenemos:
+
+SQL*Plus: Release 9.2.0.4.0 - Production on Mié Ene 14 09:35:39 2004
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Conectado a:
+Oracle9i Enterprise Edition Release 9.2.0.4.0 - Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.4.0 - Production
+
+
+CD  NME            SAL DIA
+--- ---------- ------- --------
+101 fila 1          50 23/04/98
+102 fila 2          51 24/04/98
+103                 52 25/04/98
+104 fila 4             26/04/98
+
+4 filas seleccionadas.
+
+Desconectado de Oracle9i Enterprise Edition Release 9.2.0.4.0 - Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.4.0 - Production
+
+
+- Luego podemos comprobar los valores nulos:
+
+SQL> select *
+     from p1
+     where nme is null;
+
+CD  NME 	   SAL DIA
+--- ---------- ------- ---------
+103		    52 25/04/98
+
+
+SQL> select *
+     from p1
+     where sal is null;
+
+CD  NME 	   SAL DIA
+--- ---------- ------- ---------
+104 fila 4	       26/04/98
+
+
+
+Ejemplo 2
+---------
+- Suponemos que la tabla p1 esta vacia, para lo cual hemos 
+eliminado las filas de la carga anterior.
+Los datos que deseamos introducir estan delimitados con comas.
+Sobre ese fichero incluimos los comandos del SQL*Loader y 
+tenemos un fichero de control que contiene los datos.
+
+- El fichero de control es p11.ctl:
+
+load data
+infile *
+into table p1
+fields terminated by ',' optionally enclosed by '"'
+ (cd, nme, sal, dia date 'YYMMDD')
+begindata
+200, filauno, 3,980427
+201,"fila's", 4,980428
+
+
+- Ejecutamos el SQL*Loader:
+
+$ sqlldr / control=p11
+
+SQL*Loader: Release 9.2.0.4.0 - Production on Mié Ene 14 09:39:22 2004
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+SQL*Loader-601: Para la opción INSERT, la tabla debe estar vacía. Error en la tabla P1
+
+
+- Nos da un error debido a que la tabla no esta vacia. Por ahora
+entramos en sqlplus y eliminamos todas las filas:
+
+SQL> delete from p1;
+
+
+- Salimos y ejecutamos de nuevo el SQL*Loader con el fichero de control p11:
+
+$ sqlldr / control=p11
+
+SQL*Loader: Release 9.2.0.4.0 - Production on Mié Ene 14 09:41:17 2004
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+Punto de validación alcanzado - recuento de registros lógicos 2
+
+
+- Comprobamos el contenido de la tabla:
+
+$ sqlplus / @p1
+
+SQL*Plus: Release 9.2.0.4.0 - Production on Mié Ene 14 09:42:12 2004
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Conectado a:
+Oracle9i Enterprise Edition Release 9.2.0.4.0 - Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.4.0 - Production
+
+
+CD  NME            SAL DIA
+--- ---------- ------- --------
+200 filauno          3 27/04/98
+201 fila's           4 28/04/98
+
+2 filas seleccionadas.
+
+Desconectado de Oracle9i Enterprise Edition Release 9.2.0.4.0 - Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.4.0 - Production
+
+
+- Ahora decidimos introducir mas filas en la tabla p1. Para ello usamos
+el fichero de control p12.ctl:
+
+load data
+infile *
+append
+into table p1
+fields terminated by ','
+ (cd, nme, sal, dia date 'YYMMDD')
+begindata
+400, masfilas, 3,980427
+401, masfilas, 4,980428
+
+
+- Ejecutamos el SQL*Loader:
+
+$ sqlldr / control=p12
+
+SQL*Loader: Release 9.2.0.4.0 - Production on Mié Ene 14 09:43:43 2004
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+Punto de validación alcanzado - recuento de registros lógicos 2
+
+
+- Comprobamos el contenido de la tabla:
+
+$ sqlplus / @p1
+
+SQL*Plus: Release 9.2.0.4.0 - Production on Mié Ene 14 09:44:19 2004
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+
+Conectado a:
+Oracle9i Enterprise Edition Release 9.2.0.4.0 - Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.4.0 - Production
+
+
+CD  NME            SAL DIA
+--- ---------- ------- --------
+200 filauno          3 27/04/98
+201 fila's           4 28/04/98
+400  masfilas        3 27/04/98
+401  masfilas        4 28/04/98
+
+4 filas seleccionadas.
+
+Desconectado de Oracle9i Enterprise Edition Release 9.2.0.4.0 - Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.4.0 - Production
+
+RESPUESTA 87
+
+Es la intersección de ambas.
+
+RESPUESTA 88
+
+SELECT empno, ename  
+FROM   emp1
+MINUS 
+SELECT empno, ename  
+FROM   emp
+
+RESPUESTA 89
+
+SELECT empno, ename  
+FROM   ops$lgares.emp1
+MINUS 
+SELECT empno, ename  
+FROM   emp
+
+RESPUESTA 90
+
+CREATE TABLE w1 (c CHAR(1));
+INSERT INTO  w1  VALUES ('a');
+...
+
+CREATE TABLE w2 (c CHAR(1));
+INSERT INTO  w2  VALUES ('a');
+...
+
+RESPUESTA 91
+
+SELECT c FROM w1 UNION ALL SELECT c FROM w2;
+
+RESPUESTA 92
+
+SELECT c FROM w1 UNION SELECT c FROM w2;
+
+RESPUESTA 93
+
+SELECT c FROM w1 MINUS SELECT c FROM w2;
+
+RESPUESTA 94
+
+SELECT c FROM w1 INTERSECT SELECT c FROM w2;
+
+RESPUESTA 95
+
+EXCEPT ALL --> d d
+
+INTERSECT ALL --> b b c
+
+RESPUESTA 96
+
+pro:    Proyecto
+projno  Número de proyecto (identificador)
+pname   Nombre del proyecto
+loc     Ciudad en la que se realiza el proyecto
+deptno  Departamento que dirige o que es responsable del proyecto
+
+emppro: Empleado y proyectos en los que trabaja
+empno   Número de empleado 
+projno  Número de proyecto
+hours   Horas de dedicación 
+  (empno, projno) identificador
+
+Esquema relacional:
+
+                                               dept(deptno, dname, loc)
+                                                    ^    ^
+                                                    |    |
+emp(empno, ename, job, mgr, hiredate, sal, comm, deptno) |
+       ^^                                                |
+       ||___________|                                    | 
+       |                                                 |
+       |                      pro(projno, pname, loc, deptno)     
+       |                             ^
+emppro(empno, projno, hours)         |
+                 |___________________|
+
+
+RESPUESTA 97
+
+SELECT *
+FROM   dept
+WHERE  (deptno, loc) IN (SELECT deptno, loc
+                         FROM   pro);
+
+RESPUESTA 98
+
+SELECT deptno,dname,count(*)
+FROM dept
+WHERE (deptno,loc) IN (SELECT deptno,loc
+		       FROM pro);
+
+RESPUESTA 99
+
+SELECT   deptno, dname, projno, pname
+FROM     dept NATURAL JOIN pro 
+
+RESPUESTA 100
+
+Es el ejercicio número 6, ahora con otra solución:
+
+SELECT empno, ename, sal, deptno
+FROM   emp a
+WHERE  (deptno,sal) IN (SELECT deptno,MIN(sal)
+                        FROM   EMP
+                        GROUP BY deptno)
+
+RESPUESTA 101
+
+SELECT *
+FROM emp3;
+
+-- Estado de emp3 (se habían añadido las filas de GARCIA y de GOMEZ):
+
+EMPNO ENAME      JOB         MGR HIREDATE     SAL    COMM DEPTNO
+----- ---------- --------- ----- -------- ------- ------- ------
+ 7369 SMITH      CLERK      7902 17/12/80     800             20
+ 7499 ALLEN      SALESMAN   7698 20/02/81   1,600     300     30
+ 7521 WARD       SALESMAN   7698 22/02/81   1,250     500     30
+ 7566 JONES      MANAGER    7839 02/04/81   2,975             20
+ 7654 MARTIN     SALESMAN   7698 28/09/81   1,250   1,400     30
+ 7698 BLAKE      MANAGER    7839 01/05/81   2,850             30
+ 7782 CLARK      MANAGER    7839 09/06/81   2,450             10
+ 7788 SCOTT      ANALYST    7566 09/12/82   3,000             20
+ 7839 KING       PRESIDENT       17/11/81   5,000             10
+ 7844 TURNER     SALESMAN   7698 08/09/81   1,500       0     30
+ 7876 ADAMS      CLERK      7788 12/01/83   1,100             20
+ 7900 JAMES      CLERK      7698 03/12/81     950             30
+ 7902 FORD       ANALYST    7566 03/12/81   3,000             20
+ 7934 MILLER     CLERK      7782 23/01/82   1,300             10
+ 7777 GARCIA     ANALYST    7566 12/01/81   1,600             20
+ 8888 GOMEZ      CLERK      7566 12/01/81     950             20
+
+16 filas seleccionadas.
+
+RESPUESTA 102
+
+SELECT empno, ename, sal, comm, deptno
+FROM   emp3
+WHERE   sal                 IN  (SELECT sal
+                                 FROM   emp3 a, dept b
+                                 WHERE  a.deptno = b.deptno
+                                 AND    LOWER(b.loc) = 'chicago')
+OR     NVL(comm, -1)       IN  (SELECT NVL(comm, -1)
+                                 FROM   emp3 a, dept b
+                                 WHERE  a.deptno = b.deptno
+                                 AND    loc = 'CHICAGO')
+ORDER BY deptno, empno
+
+
+RESPUESTA 103
+
+SELECT empno, ename, sal, comm, deptno
+FROM   emp3
+WHERE   sal                 IN  (SELECT sal
+                                 FROM   emp3 a, dept b
+                                 WHERE  a.deptno = b.deptno
+                                 AND    LOWER(b.loc) = 'chicago')
+AND    NVL(comm, -1)       IN  (SELECT NVL(comm, -1)
+                                 FROM   emp3 a, dept b
+                                 WHERE  a.deptno = b.deptno
+                                 AND    loc = 'CHICAGO')
+ORDER BY empno
+
+RESPUESTA 104
+
+SELECT empno, ename, sal, comm, deptno
+FROM   emp3
+WHERE  (sal,NVL(comm,-1)) IN ((SELECT sal,NVL(comm, -1)
+                                 FROM   emp3 a, dept b
+                                 WHERE  a.deptno = b.deptno
+                                 AND    loc = 'CHICAGO')
+ORDER BY empno
+
+RESPUESTA 105
+
+SELECT   empno, ename, sal, deptno, min_sal min, sal - min_sal difer
+FROM     emp a, (SELECT MIN(sal) min_sal
+                 FROM   emp)
+WHERE    sal >  min_sal
+ORDER BY sal
+
+RESPUESTA 106
+
+SELECT   empno, ename, sal, deptno, avg_sal media, sal - avg_sal difer
+FROM     emp a, (SELECT AVG(sal) avg_sal
+                 FROM   emp)
+WHERE    sal >  avg_sal
+ORDER BY sal
+
+RESPUESTA 116
+
+CREATE TABLE emp4
+AS SELECT * FROM emp
+
+RESPUESTA 122
+ 
+CREATE TABLE kk1
+   (cd NUMBER, nmb CHAR(5), tmp DATE)
+
+RESPUESTA 123
+
+Oracle almacena los datos referentes a fechas y tiempo en 
+un tipo de dato DATE, que permite almacenar fechas, tiempo y
+ambos a la vez.
+Debe usarse la función de Oracle TO_DATE para convertir una
+expresión carácter a una fecha, y en ella usar las máscaras 
+de formateo adecuadas a la expresión:
+
+INSERT INTO kk1 VALUES (10,'nome',TO_DATE('03:45','HH24:MI'))
+
+Algunas otras máscaras son:
+
+D     Día de la semana (1-7)
+DD    Día del mes (1-31)
+DDD   Día del año (1-366)
+DAY   Nombre del día
+HH    Hora del día (1-12)
+HH12  Idem
+HH24  Hora del día (1-24)
+MI    Minuto (0-59)
+MM    Mes (01-12; JAN = 01)  
+MON   Nombre del mes abreviado
+MONTH Nombre del mes
+SS    Segundo (0-59)
+YYYY  Año
+YYY   Ultimos tres dígitos del año
+YY    Ultimos dos dígitos del año
+Y     Ultimo dígito del año
+
+RESPUESTA 124
+
+SELECT * FROM kk1;
+
+        CD NMB   TMP
+---------- ----- --------
+        10 nome  01/03/04
+
+Se trata realmente de un error?
+El ejercicio siguiente nos lo aclara.
+
+RESPUESTA 125
+
+SELECT cd, nmb, TO_CHAR(tmp,'HH24:MI')
+FROM   kk1
+
+        CD NMB   TO_CH
+---------- ----- -----
+        10 nome  03:45
+
+De la misma forma que usamos antes TO_DATE, ahora debemos usar TO_CHAR
+
+RESPUESTA 126
+
+INSERT INTO kk1 
+VALUES (11,'n11',TO_DATE('19:12','HH24:MI'));
+
+INSERT INTO kk1 
+VALUES (12,'n12',TO_DATE('00:02','HH24:MI'));
+
+RESPUESTA 127
+
+SELECT cd, nmb, TO_CHAR(tmp,'HH24:MI')
+FROM   kk1
+ORDER BY 3
+
+        CD NMB   TO_CH
+---------- ----- -----
+        12 n12   00:02
+        10 nome  03:45
+        11 n11   19:12
+
+RESPUESTA 128
+
+ALTER TABLE kk1 ADD dta DATE
+
+RESPUESTA 129
+
+De nuevo hay que usar la máscara apropiada:
+
+INSERT INTO kk1 
+VALUES (13,'n13',TO_DATE('09:09','HH24:MI'),TO_DATE('14-04-2002','DD-MM-YYYY'))
+
+INSERT INTO kk1 
+VALUES (14,'n14',TO_DATE('14:09','HH24:MI'),TO_DATE('18-02-2002','DD-MM-YYYY'))
+
+RESPUESTA 130
+
+SELECT cd, nmb, TO_CHAR(tmp,'HH24:MI'), TO_CHAR(dta,'DD-MM-YYYY')
+FROM   kk1
+
+        CD NMB   TO_CH TO_CHAR(DT
+---------- ----- ----- ----------
+        10 nome  03:45
+        11 n11   19:12
+        12 n12   00:02
+        13 n13   09:09 14-04-2002
+        14 n14   14:09 18-02-2002
+
+Si hubiéramos forzado la salida de una fecha en la columna tmp y de
+una hora en dta, obtendríamos:
+
+SELECT cd, nmb, TO_CHAR(tmp,'DD-MM-YYYY HH24:MI'), TO_CHAR(dta,'DD-MM-YYYY HH24:MI')
+FROM   kk1
+
+        CD NMB   TO_CHAR(TMP,'DD- TO_CHAR(DTA,'DD-
+	---------- ----- ---------------- ----------------
+        10 nome  01-03-2004 03:45
+        11 n11   01-03-2004 19:12
+        12 n12   01-03-2004 00:02
+        13 n13   01-03-2004 09:09 14-04-2002 00:00
+        14 n14   01-03-2004 14:09 18-02-2002 00:00
+
+RESPUESTA 131
+
+SELECt cd, nmb, TO_CHAR(tmp,'HH24:MI'), TO_CHAR(dta,'DD-MM-YYYY')
+FROM   kk1
+ORDER BY 4
+
+        CD NMB   TO_CH TO_CHAR(DT
+---------- ----- ----- ----------
+        13 n13   09:09 14-04-2002
+        14 n14   14:09 18-02-2002
+        10 nome  03:45
+        11 n11   19:12
+        12 n12   00:02        
+
+Observa que el resultado no es lo deseado !
+
+RESPUESTA 132
+
+SELECt   cd, nmb, TO_CHAR(tmp,'HH24:MI'), TO_CHAR(dta,'DD-MM-YYYY')
+FROM     kk1
+ORDER BY dta
+
+
+        CD NMB   TO_CH TO_CHAR(DT
+---------- ----- ----- ----------
+        14 n14   14:09 18-02-2002
+        13 n13   09:09 14-04-2002
+        10 nome  03:45
+        11 n11   19:12
+        12 n12   00:02
+
+5 filas seleccionadas.
+
+RESPUESTA 133
+
+SELECT   cd, nmb, TO_CHAR(tmp,'HH24:MI') Hora,
+         TO_CHAR(dta,'DD "of" Month YYYY') "Ano"
+FROM     kk1
+ORDER BY dta, tmp
+
+RESPUESTA 134
+
+Algunas funciones para el manejo de fechas:
+ADD_MONTHS (d,n)    Añade m meses a la fecha d
+LAST_DAY (d)        Fecha del último día del mes de la fecha d
+MONTHS_BETWEEN (d1, d2)  Meses entre d1 y d2
+NETX_DAY (d, day)   La fecha del primer day después de la fecha d
+SYSDATE             Fecha de hoy
+
+SELECT empno,ename,hiredate,hiredate-11 "HRD-11",LAST_DAY(hiredate) "Ult. dia",ADD_MONTHS(SYSDATE,2) "Mes+2"
+FROM emp;

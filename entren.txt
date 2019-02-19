@@ -1,0 +1,35 @@
+load data 
+infile * 
+into table entren 
+fields terminated by "|" optionally enclosed by '"'
+(cd_entren,nombre,anhos_en_liga)
+BEGINDATA
+1|"Terry Stotts"|2
+2|"John Carroll"|1
+3|"Scott Skiles"|4
+4|"Paul Silas"|9
+5|"Don Nelson"|26
+6|"Jeff Bzdelik"|2
+7|"Larry Brown"|21
+8|"Eric Musselman"|2
+9|"Jeff Van Gundy"|8
+10|"Rick Carlisle"|3
+11|"Mike Dunleavy"|11
+12|"Phil Jackson"|14
+13|"Hubie Brown"|12
+14|"Stan Van Gundy"|1
+15|"Terry Porter"|1
+16|"Flip Saunders"|9
+17|"Lawrence Frank"|1
+18|"Tim Floyd"|5
+19|"Lenny Wilkens"|31
+20|"Johnny Davis"|2
+21|"Jim O'Brien"|4
+22|"Mike D'Antoni"|2
+23|"Maurice Cheeks"|3
+24|"Rick Adelman"|14
+25|"Gregg Popovich"|8
+26|"Nate McMillan"|4
+27|"Jay Triano"|1
+28|"Jerry Sloan"|19
+29|"Eddie Jordan"|3

@@ -1,0 +1,161 @@
+1. ¿Cuantos jugadores extranjeros hay?
+
+select count(*)
+from jug
+where nacionalidad not like 'USA';
+ 
+ 
+  COUNT(*)
+----------
+        25
+ 
+1 fila seleccionada.
+
+2. ¿Que promedio anotador consiguio Gasol en la liga regular?
+
+select sum(puntos)/count(*)
+from juega
+where cd_jug=(select cd_jug from jug where nombre='Pau Gasol');
+ 
+ 
+SUM(PUNTOS)/COUNT(*)
+--------------------
+                21,5
+ 
+1 fila seleccionada.
+ 
+3. ¿Quien metio mas puntos en un partido de playoff?
+
+select nombre
+from jug
+where cd_jug IN
+(select cd_jug from juega2 where puntos=(select max(puntos) from juega2));
+
+
+NOMBRE
+------------------------------
+Tim Duncan
+ 
+1 fila seleccionada.
+
+
+4. ¿Cual fue la mayor diferencia de puntos de playoffs?
+
+select max(abs(ptos_local-ptos_visitante))
+from playoff;
+
+MAX(ABS(PTOS_LOCAL-PTOS_VISITANTE))
+-----------------------------------
+                                 15
+ 
+1 fila seleccionada.
+
+
+5. ¿Quien consiguio mas victorias en la liga regular?
+
+select local,visitante,count(*)
+from partido
+where (ptos_local>ptos_visitante) and loca
+
+
+6. ¿Quien entrenaba a San Antonio en su ultimo partido de playoff?
+
+select a.nombre 
+from entren a
+where cd_entren=
+(select cd_entren from entrena where cd_franq=
+	(select cd_franq from franq b where b.nombre='San Antonio Spurs')
+		and (select max(fecha) from playoff where local=
+			(select cd_franq from franq c where c.nombre='San Antonio Spurs') 
+			or visitante=(select cd_franq from franq d where d.nombre='San Antonio Spurs')) BETWEEN tvi and tvf);
+
+7. ¿Quienes no arbitraron a Memphis en playoffs?
+
+select nombre
+from arbitro
+where cd_arbitro NOT IN 
+(select cd_arbitro from arbitra3 where cd_partido=
+	(select cd_partido from playoff where local=
+		(select cd_franq from franq where nombre='Memphis Grizzlies') or visitante=
+			(select cd_franq from franq where nombre='Memphis Grizzlies')));
+			   
+NOMBRE
+------------------------------
+John Smith
+Steve Bay
+James Cartwright
+Adolph Strickland
+ 
+4 filas seleccionadas.
+			   
+
+8. ¿Que equipos forman parte de la NBA (divisiones y conferencias)?
+
+select a.nombre,b.conferencia,b.nombre
+from franq a, divis b
+where a.nom_div=b.nombre
+group by b.conferencia,b.nombre,a.nombre;
+
+NOMBRE                         CONFE NOMBRE
+------------------------------ ----- ------------
+Atlanta Hawks                  Este  Central
+Chicago Bulls                  Este  Central
+Cleveland Cavaliers            Este  Central
+Detroit Pistons                Este  Central
+Indiana Pacers                 Este  Central
+Milwaukee Bucks                Este  Central
+New Orleans Hornets            Este  Central
+Toronto Raptors                Este  Central
+Golden State Warriors          Este  Pacifico
+Los Angeles Clippers           Este  Pacifico
+Los Angeles Lakers             Este  Pacifico
+Portland Trail Blazers         Este  Pacifico
+Sacramento Kings               Este  Pacifico
+Seattle Supersonics            Este  Pacifico
+Boston Celtics                 Oeste Atlantico
+Miami Heat                     Oeste Atlantico
+New Jersey Nets                Oeste Atlantico
+New York Knicks                Oeste Atlantico
+Orlando Magic                  Oeste Atlantico
+Philadelphia 76ers             Oeste Atlantico
+Washington Wizards             Oeste Atlantico
+Dallas Mavericks               Oeste Medio-Oeste
+Denver Nuggets                 Oeste Medio-Oeste
+Houston Rockets                Oeste Medio-Oeste
+Memphis Grizzlies              Oeste Medio-Oeste
+Minnesota Timberwolves         Oeste Medio-Oeste
+Phoenix Suns                   Oeste Medio-Oeste
+San Antonio Spurs              Oeste Medio-Oeste
+Utah Jazz                      Oeste Medio-Oeste
+ 
+29 filas seleccionadas.
+
+
+9. ¿Que equipo vende los pantalones visitantes mas baratos?
+
+select a.nombre
+from franq a
+where cd_franq IN 
+(select cd_franq from vende b where b.precio=(select min(precio) from vende c where cd_prod=
+	(select cd_prod from merchan d where d.nombre='Pantalon visitante'))); 
+
+NOMBRE
+------------------------------
+Boston Celtics
+ 
+1 fila seleccionada.
+
+
+10. ¿Quien fue el numero 1 del draft?
+
+select nombre
+from jug
+where cd_jug=(select cd_jug from jug where ind_tipo=0 and puesto_draft=1);
+ 
+ 
+NOMBRE
+------------------------------
+LeBron James
+ 
+1 fila seleccionada.
+

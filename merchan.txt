@@ -1,0 +1,9 @@
+load data 
+infile * 
+into table merchan
+fields terminated by "|" optionally enclosed by '"'
+(cd_prod,nombre,ind_tipo,talla,color,marca)
+BEGINDATA
+1150|"Camiseta local"|0|"XXL"||"Adidas"
+760|"Pantalon visitante"|0|"XL"||"And1"
+1062|"Gorra"|2||"Verde"|"Champion"

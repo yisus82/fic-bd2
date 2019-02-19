@@ -1,0 +1,34 @@
+load data 
+infile * 
+into table pab 
+fields terminated by "|" optionally enclosed by '"'
+(cd_pab,nombre,ciudad,capac,anho_inaug)
+BEGINDATA
+1|"Phillips Arena"|"Atlanta"|20000|1999
+2|"Fleet Center"|"Boston"|19600|1995
+3|"United Center"|"Chicago"|22700|1994
+4|"Gund Arena"|"Cleveland"|20500|1994
+5|"American Airlines Center"|"Dallas"|20000|2001
+6|"Pepsi Center"|"Denver"|19300|1999
+7|"The Palace of Auburn Hills"|"Auburn Hills"|22000|1988
+8|"The Arena"|"Oakland"|19600|1997
+9|"Compaq Center"|"Houston"|16300|1975
+10|"Conseco Field House"|"Indianapolis"|18500|1999
+11|"Staples Center"|"Los Angeles"|20100|1999
+12|"The Pyramid"|"Memphis"|20142|1991
+13|"American Airlines Arena"|"Miami"|19600|1999
+14|"Bradley Center"|"Milwaukee"|18700|1988
+15|"Target Center"|"Minneapolis"|19000|1990
+16|"Continental Airlines Arena"|"East Rutherford"|20000|1981
+17|"New Orleans Arena"|"New Orleans"|18000|1999
+18|"Madison Square Garden"|"New York"|19800|1968
+19|"TD Waterhouse Centre"|"Orlando"|17248|1989
+20|"First Union Center"|"Philadelphia"|20400|1996
+21|"America West Arena"|"Phoenix"|18900|1992
+22|"Rose Garden"|"Portland"|19900|1995
+23|"ARCO Arena"|"Sacramento"|17300|1988
+24|"Alamodome"|"San Antonio"|20550|1993
+25|"Key Arena"|"Seattle"|17100|1962
+26|"Air Canada Centre"|"Toronto"|19800|1999
+27|"Delta Center"|"Salt Lake City"|19200|1991
+28|"MCI Center"|"Washington D.C."|20500|1997

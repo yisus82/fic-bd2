@@ -1,0 +1,8 @@
+load data 
+infile * 
+into table confer
+fields terminated by "|" optionally enclosed by '"'
+(nombre,campeon)
+BEGINDATA
+"Este"|NULL
+"Oeste"|NULL

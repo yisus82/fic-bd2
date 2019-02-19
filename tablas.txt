@@ -1,0 +1,467 @@
+CREATE TABLE Jug(
+  cd_jug D-codigo-jugador CONSTRAINT KeyJug PRIMARY KEY,
+  nombre D-nombre,
+  altura D-altura,
+  peso D-peso,
+  fecha_nac D-fecha,
+  nacionalidad D-nacionalidad,
+  anhos_experiencia D-anhos-liga,
+  ind_tipo D-tipo-jugador,
+  puesto_draft D-puesto-draft,
+  univers D-universidad,
+  equipo_actual D-equipo-actual
+);
+
+CREATE TABLE Pab(
+  cd_pab D-codigo-pabellon CONSTRAINT KeyPab PRIMARY KEY,
+  nombre D-nombre-persona,
+  ciudad D-ciudad,
+  capac D-capacidad,
+  anho_inaug D-anho
+);
+
+CREATE TABLE Confer(
+  nombre D-nombre-conferencia CONSTRAINT KeyConfer PRIMARY KEY,
+  campeon D-nombre-equipo 
+);
+
+CREATE TABLE Divis(
+  nombre D-nombre-division CONSTRAINT KeyDivis PRIMARY KEY,
+  conferencia D-nombre-conferencia,
+  campeon D-nombre-equipo,
+  CONSTRAINT ForDivis FOREIGN KEY (conferencia) REFERENCES Confer(nombre)
+	ON DELETE SET NULL,
+  	ON UPDATE CASCADE 
+);
+
+CREATE TABLE Franq(
+  cd_franq D-codigo-franquicia CONSTRAINT KeyFranq PRIMARY KEY,
+  nombre D-nombre-equipo,
+  ciudad D-ciudad,
+  cd_pab D-codigo-pabellon,
+  nom_div D-nombre-division,
+  CONSTRAINT ForFranq1 FOREIGN KEY (cd_pab) REFERENCES Pab(cd_pab)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForFranq2 FOREIGN KEY (nom_div) REFERENCES Divis(nombre)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Pres(
+  cd_pres D-codigo-presidente CONSTRAINT KeyPres PRIMARY KEY,
+  nombre D-nombre-persona,
+  franquicia D-codigo-franquicia,
+  tvi D-fecha NOT NULL,
+  tvf D-fecha,
+  CONSTRAINT ForPres FOREIGN KEY (franquicia) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT FechasPres CHECK (tvi<tvf)
+);
+
+CREATE TABLE HistJug(
+  cd_jug D-codigo-jugador,
+  num_ver D-numero-version,
+  dorsal D-dorsal,
+  posicion D-posicion,
+  cd_franq D-codigo-franquicia,
+  tvi D-fecha NOT NULL,
+  tvf D-fecha,
+  CONSTRAINT KeyHist PRIMARY KEY (cd_jug,num_ver),
+  CONSTRAINT ForHist1 FOREIGN KEY (cd_jug) REFERENCES Jug(cd_jug)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForHist2 FOREIGN KEY (cd_franq) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT FechasHistJug CHECK (tvi<tvf)
+);
+
+CREATE TABLE Contr_TV(
+  cd_contr D-codigo-contrato,
+  cd_franq D-codigo-franquicia,
+  durac D-duracion-contrato,
+  cantidad D-cantidad-dinero,
+  tipo D-tipo-contrato,
+  cadena D-cadena,
+  CONSTRAINT KeyContr PRIMARY KEY (cd_contr),
+  CONSTRAINT ForContr FOREIGN KEY (cd_franq) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Sponsor(
+  cd_sponsor D-codigo-sponsor CONSTRAINT KeySponsor PRIMARY KEY,
+  nombre D-nombre-empresa,
+  tipo D-tipo-sponsor
+);
+
+CREATE TABLE Patroc(
+  cd_franq D-codigo-franquicia,
+  cd_sponsor D-codigo-sponsor,
+  cantidad D-cantidad-dinero,
+  durac D-duracion-contrato,
+  CONSTRAINT KeyPatroc PRIMARY KEY (cd_franq,cd_sponsor),
+  CONSTRAINT ForPatroc1 FOREIGN KEY (cd_franq) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForPatroc2 FOREIGN KEY (cd_sponsor) REFERENCES Sponsor(cd_sponsor)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Entren(
+  cd_entren D-codigo-entrenador CONSTRAINT KeyEntren PRIMARY KEY,
+  nombre D-nombre-persona,
+  anhos_en_liga d-anhos-liga
+);
+
+CREATE TABLE Entrena(
+  cd_franq D-codigo-franquicia,
+  cd_entren D-codigo-entrenador,
+  tvi D-fecha NOT NULL,
+  tvf D-fecha,
+  CONSTRAINT KeyEntrena PRIMARY KEY (cd_franq,cd_entren),
+  CONSTRAINT ForEntrena1 FOREIGN KEY (cd_franq) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForEntrena2 FOREIGN KEY (cd_entren) REFERENCES Entren(cd_entren)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT FechasEntrena CHECK (tvi<tvf)
+);
+
+CREATE TABLE Cheer(
+  cd_cheer D-codigo-cheerleader CONSTRAINT KeyCheer PRIMARY KEY,
+  cd_franq D-codigo-franquicia,
+  nombre D-nombre-persona,
+  fecha_nac D-fecha,
+  lugar_resid D-lugar-residencia,
+  CONSTRAINT ForCheer FOREIGN KEY (cd_franq) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Merchan(
+  cd_prod D-codigo-producto CONSTRAINT KeyMerchan PRIMARY KEY,
+  nombre D-nombre-empresa,
+  ind_tipo D-tipo-producto,
+  talla D-talla,
+  color D-color,
+  marca D-marca
+);
+
+CREATE TABLE Vende(
+  cd_franq D-codigo-franquicia,
+  cd_prod D-codigo-franquicia,
+  precio D-precio,
+  CONSTRAINT KeyVende PRIMARY KEY (cd_franq,cd_prod),
+  CONSTRAINT ForVende1 FOREIGN KEY (cd_franq) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForVende2 FOREIGN KEY (cd_prod) REFERENCES Merchan(cd_prod)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Elimin(
+  ronda D-ronda,
+  conferencia D-nombre-conferencia,
+  CONSTRAINT KeyElimin PRIMARY KEY (ronda,conferencia)
+);
+
+CREATE TABLE Partido(
+  cd_partido D-codigo-partido CONSTRAINT KeyPartido PRIMARY KEY,
+  fecha D-fecha,
+  local D-nombre-equipo,
+  visitante D-nombre-equipo,
+  ptos_local D-puntos,
+  ptos_visitante D-puntos,
+  televisado D-televisado,
+  duracion D-duracion-partido,
+  rebotes_l D-rebotes,
+  rebotes_v D-rebotes,
+  asist_l D-asistencias,
+  asist_v D-asistencias,
+  tapones_l D-tapones,
+  tapones_v D-tapones,
+  robos_l D-robos,
+  robos_v D-robos,
+  CONSTRAINT ForPartido1 FOREIGN KEY (local) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForPartido2 FOREIGN KEY (visitante) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Playoff(
+  cd_partido D-codigo-partido CONSTRAINT KeyPlayoff PRIMARY KEY,
+  fecha D-fecha,
+  local D-nombre-equipo,
+  visitante D-nombre-equipo,
+  ptos_local D-puntos,
+  ptos_visitante D-puntos,
+  televisado D-televisado,
+  duracion D-duracion-partido,
+  rebotes_l D-rebotes,
+  rebotes_v D-rebotes,
+  asist_l D-asistencias,
+  asist_v D-asistencias,
+  tapones_l D-tapones,
+  tapones_v D-tapones,
+  robos_l D-robos,
+  robos_v D-robos,
+  ronda D-ronda,
+  conferencia D-nombre-conferencia,
+  CONSTRAINT ForPlayoff1 FOREIGN KEY (local) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForPlayoff2 FOREIGN KEY (visitante) REFERENCES Franq(cd_franq)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForPlayoff3 FOREIGN KEY (ronda,conferencia) REFERENCES Elimin(ronda,conferencia)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Coment(
+  cd_coment D-codigo-comentarista CONSTRAINT KeyComent PRIMARY KEY,
+  nombre D-nombre-persona,
+  fecha_nac D-fecha,
+  fecha_comienzo D-fecha
+);
+
+CREATE TABLE Evento_a_s(
+  cd_evento D-codigo-evento CONSTRAINT KeyEvento_a_s PRIMARY KEY,
+  fecha D-fecha,
+  ciudad D-ciudad,
+  ind_tipo D-tipo-evento,
+  ganador D-ganador,
+  mvp D-nombre-persona,
+  result_este D-puntos,
+  result_oeste D-puntos,
+  rebotes_este D-rebotes,
+  rebotes_oeste D-rebotes,
+  asist_este D-asistencias,
+  asist_oeste D-asistencias,
+  tapones_este D-tapones,
+  tapones_oeste D-tapones,
+  robos_este D-robos,
+  robos_oeste D-robos,
+  duracion D-duracion-partido
+);
+
+CREATE TABLE Comenta(
+  cd_partido D-codigo-partido,
+  cd_coment D-codigo-comentarista,
+  audiencia d-audiencia,
+  CONSTRAINT KeyComenta PRIMARY KEY (cd_partido,cd_coment),
+  CONSTRAINT ForComenta1 FOREIGN KEY (cd_partido) REFERENCES Partido(cd_partido)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForComenta2 FOREIGN KEY (cd_coment) REFERENCES Coment(cd_coment)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Comenta2(
+  cd_evento D-codigo-evento,
+  cd_coment D-codigo-comentarista,
+  audiencia D-audiencia,
+  CONSTRAINT KeyComenta2 PRIMARY KEY (cd_evento,cd_coment),
+  CONSTRAINT ForComenta21 FOREIGN KEY (cd_evento) REFERENCES Evento_a_s(cd_evento)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForComenta22 FOREIGN KEY (cd_coment) REFERENCES Coment(cd_coment)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Comenta3(
+  cd_partido D-codigo-partido,
+  cd_coment D-comentarista,
+  audiencia D-audiencia,
+  CONSTRAINT KeyComenta3 PRIMARY KEY (cd_partido,cd_coment),
+  CONSTRAINT ForComenta31 FOREIGN KEY (cd_partido) REFERENCES Playoff(cd_partido)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForComenta32 FOREIGN KEY (cd_coment) REFERENCES Coment(cd_coment)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Arbitro(
+  cd_arbitro D-codigo-arbitro CONSTRAINT KeyArbitro PRIMARY KEY,
+  nombre D-nombre-persona,
+  fecha_nac D-fecha,
+  fecha_comienzo D-fecha
+);
+
+CREATE TABLE Arbitra(
+  cd_arbitro D-codigo-arbitro,
+  cd_partido D-codigo-partido,
+  CONSTRAINT KeyArbitra PRIMARY KEY (cd_arbitro,cd_partido),
+  CONSTRAINT ForArbitra1 FOREIGN KEY (cd_arbitro) REFERENCES Arbitro(cd_arbitro)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForArbitra2 FOREIGN KEY (cd_partido) REFERENCES Partido(cd_partido)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Arbitra2(
+  cd_arbitro D-codigo-arbitro,
+  cd_evento D-codigo-evento,
+  CONSTRAINT KeyArbitra2 PRIMARY KEY (cd_arbitro,cd_evento),
+  CONSTRAINT ForArbitra21 FOREIGN KEY (cd_arbitro) REFERENCES Arbitro(cd_arbitro)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForArbitra22 FOREIGN KEY (cd_evento) REFERENCES Evento_a_s(cd_evento)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Arbitra3(
+  cd_arbitro D-codigo-arbitro,
+  cd_partido D-codigo-partido,
+  CONSTRAINT KeyArbitra3 PRIMARY KEY (cd_arbitro,cd_partido),
+  CONSTRAINT ForArbitra31 FOREIGN KEY (cd_arbitro) REFERENCES Arbitro(cd_arbitro)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForArbitra32 FOREIGN KEY (cd_partido) REFERENCES Playoff(cd_partido)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Juega(
+  cd_partido D-codigo-partido,
+  cd_jug D-codigo-jugador,
+  num_ver D-numero-version,
+  puntos D-puntos,
+  rebotes D-rebotes,
+  asist D-asistencias,
+  tapones D-tapones,
+  robos D-robos,
+  minutos D-minutos-jugados,
+  t1_i D-tiros,
+  t2_i D-tiros,
+  t3_i D-tiros,
+  t1_c D-tiros,
+  t2_c D-tiros,
+  t3_c D-tiros,
+  CONSTRAINT KeyJuega PRIMARY KEY (cd_partido,cd_jug,num_ver),
+  CONSTRAINT ForJuega1 FOREIGN KEY (cd_partido) REFERENCES Partido(cd_partido)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForJuega2 FOREIGN KEY (cd_jug,num_ver) REFERENCES HistJug(cd_jug,num_ver)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Juega2(
+  cd_partido D-codigo-partido,
+  cd_jug D-codigo-jugador,
+  num_ver D-numero-version,
+  puntos D-puntos,
+  rebotes D-rebotes,
+  asist D-asistencias,
+  tapones D-tapones,
+  robos D-robos,
+  minutos D-minutos,
+  t1_i D-tiros,
+  t2_i D-tiros,
+  t3_i D-tiros,
+  t1_c D-tiros,
+  t2_c D-tiros,
+  t3_c D-tiros,
+  CONSTRAINT KeyJuega2 PRIMARY KEY (cd_partido,cd_jug,num_ver),
+  CONSTRAINT ForJuega21 FOREIGN KEY (cd_partido) REFERENCES Playoff(cd_partido)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForJuega22 FOREIGN KEY (cd_jug,num_ver) REFERENCES HistJug(cd_jug,num_ver)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Participa(
+  cd_jug D-codigo-jugador,
+  cd_evento D-codigo-evento,
+  tipo D-tipo-evento2,
+  puntos D-puntos,
+  rebotes D-rebotes,
+  asist D-asistencias,
+  tapones D-tapones,
+  robos D-robos,
+  minutos D-minutos-jugados,
+  t1_i D-tiros,
+  t2_i D-tiros,
+  t3_i D-tiros,
+  t1_c D-tiros,
+  t2_c D-tiros,
+  t3_c D-tiros,
+  puntuacion1 D-puntuacion,
+  puntuacion2 D-puntuacion,
+  CONSTRAINT KeyParticipa PRIMARY KEY (cd_jug,cd_evento),
+  CONSTRAINT ForParticipa1 FOREIGN KEY (cd_jug) REFERENCES Jug(cd_jug)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForParticipa2 FOREIGN KEY (cd_evento) REFERENCES Evento_a_s(cd_evento)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Participa2(
+  cd_jug D-codigo-jugador,
+  cd_evento D-codigo-evento,
+  tipo D-tipo-evento2,
+  puntos D-puntos,
+  rebotes D-rebotes,
+  asist D-asistencias,
+  tapones D-tapones,
+  robos D-robos,
+  minutos D-minutos-jugados,
+  t1_i D-tiros,
+  t2_i D-tiros,
+  t3_i D-tiros,
+  t1_c D-tiros,
+  t2_c D-tiros,
+  t3_c D-tiros,
+  puntuacion1 D-puntuacion,
+  puntuacion2 D-puntuacion,
+  CONSTRAINT KeyParticipa PRIMARY KEY (cd_jug,cd_evento),
+  CONSTRAINT ForParticipa1 FOREIGN KEY (cd_jug) REFERENCES Jug(cd_jug)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForParticipa2 FOREIGN KEY (cd_evento) REFERENCES Evento_a_s(cd_evento)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Participa3(
+  cd_jug D-codigo-jugador,
+  cd_evento D-codigo-evento,
+  tipo D-tipo-evento,
+  puntos D-puntos,
+  rebotes D-rebotes,
+  asist D-asistencias,
+  tapones D-tapones,
+  robos D-robos,
+  minutos D-minutos-jugados,
+  t1_i D-tiros,
+  t2_i D-tiros,
+  t3_i D-tiros,
+  t1_c D-tiros,
+  t2_c D-tiros,
+  t3_c D-tiros,
+  puntuacion1 D-puntuacion,
+  puntuacion2 D-puntuacion,
+  CONSTRAINT KeyParticipa PRIMARY KEY (cd_jug,cd_evento),
+  CONSTRAINT ForParticipa1 FOREIGN KEY (cd_jug) REFERENCES Jug(cd_jug)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE,
+  CONSTRAINT ForParticipa2 FOREIGN KEY (cd_evento) REFERENCES Evento_a_s(cd_evento)
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
+);

@@ -1,0 +1,2 @@
+INSERT INTO confer VALUES('Este',NULL);
+INSERT INTO confer VALUES('Oeste',NULL);

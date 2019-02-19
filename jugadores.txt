@@ -1,0 +1,177 @@
+Pos.	Dorsal	Nombre		Nac.	Altura	Exp.	Universidad		F. Nac.		Peso
+
+ATLANTA
+
+A-P	 14	Obinna Ekezie	NIG	2,06	3	Maryland '99		22/8/75		122
+E	 6	Travis Hansen	USA	1,98	R	Brigham Young '03	15/4/78		93
+P	 39	Zeljko Rebraca	SER	2,11	2	Serbia-Montenegro	9/4/72		117
+
+BOSTON
+
+A	 20	Jumaine Jones	USA	2,01	4	Georgia '01		10/2/79		99
+A	 34	Paul Pierce	USA	2,00	5	Kansas '99		13/10/77	104
+P	 45	Raef LaFrentz	USA	2,10	5	Kansas '98		29/5/76		111
+
+CHICAGO
+
+A-P	 3	Tyson Chandler	USA	2,15	2	Dominguez HS (CA)	2/10/82		106
+E	 13	Kendall Gill	USA	1,96	13	Illinois '90		25/5/68		98
+B	 12	Kirk Hinrich	USA	1,91	R	Kansas '03		2/1/81		86
+
+CLEVELAND
+
+P	 11	Zydrunas Ilgauskas	LIT	2,18	5	Lituania			5/6/75		117
+E	 23	LeBron James		USA	2,03	R	St. Vincent-St. Mary HS (OH)	30/12/84	108
+P	 44	Ruben Boumtje Boumtje	CAM	2,12	2	Georgetown '01			20/5/78		116
+
+DALLAS
+
+P	 44	Shawn Bradley	USA	2,28	10	Brigham Young '94	22/3/72		124
+B	 13	Steve Nash	CAN	1,90	7	Santa Clara '96		7/2/74		88
+A	 41	Dirk Nowitzki	ALE	2,11	5	Alemania		19/6/78		111
+
+DENVER
+
+A	 15	Carmelo Anthony	USA	2,03	R	Syracuse '03		29/5/84		100
+P	 23	Marcus Camby	USA	2,11	7	Massachusetts '97	22/3/74		102
+A-P	 31	Nene Hilario	BRA	2,07	1	Brasil			13/9/82		118
+
+DETROIT
+
+A-P	 31	Darko Milicic	SER	2,13	R	Serbia-Montenegro	20/6/85		111
+A-P	 3	Ben Wallace	USA	2,03	7	Virginia Union '96	10/9/74		109
+A-P	 30	Rasheed Wallace	USA	2,08	8	North Carolina '97	17/9/74		104
+
+GOLDEN STATE
+
+P	 00	Evan Eschmeyer		USA	2,08	4	Northwestern '99	30/5/75		113
+A-P	 54	Popeye Jones		USA	2,03	10	Murray State '92	17/6/70		120
+E	 23	Jason Richardson	USA	1,98	2	Michigan State '01	20/1/81		102
+
+HOUSTON
+
+B	 3	Steve Francis		USA	1,91	4	Maryland '99		21/2/77		91
+A-P	 35	Clarence Weatherspoon	USA	2,01	11	Southern Mississippi 	8/9/70		122
+P	 11	Yao Ming		CHI	2,26	1	China			12/9/80		141
+
+INDIANA
+
+E	 31	Reggie Miller	USA	2,01	16	UCLA '87		24/8/65		88
+A-P	 7	Jermaine O'Neal	USA	2,11	7	Eau Claire HS (SC)	13/10/78	110
+B	 11	Jamaal Tinsley	USA	1,91	2	Iowa State '01		28/2/78		88
+
+L.A. CLIPPERS
+
+A	 42	Elton Brand	USA	2,03	4	Duke '01		11/3/79		120
+B	 20	Marko Jaric	SER	1,98	1	Serbia-Montenegro	12/10/78	98
+P	 34	Josh Moore	USA	2,18	R	Michigan '04		16/11/80	149
+
+L.A. LAKERS
+
+E	 8	Kobe Bryant		USA	1,98	7	Lower Merion (PA)	100
+P	 34	Shaquille O'Neal	USA	2,17	11	Louisiana State '93	154
+B	 20	Gary Payton		USA	1,93	13	Oregon State '90	82
+
+MEMPHIS
+
+A-P	 16	Pau Gasol	ESP	2,14	2	F.C. Barcelona '01	6/7/80		109
+A	 33	Mike Miller	USA	2,03	3	Florida '02		19/2/80		99
+B	 2	Jason Williams	USA	1,86	5	Florida '98		18/11/75	86
+
+MIAMI
+
+B	12	Bimbo Coles	USA	1,88	13	Virginia Tech '90	22/4/68		83
+A	7	Lamar Odom	USA	2,08	4	Rhode Island '99	6/11/79		102
+A	22	John Wallace	USA	2,06	6	Syracuse '96		9/2/74		102
+
+MILWAUKEE
+
+A	7	Toni Kukoc	CRO	2,10	10	Croacia		18/9/68		106
+E	24	Desmond Mason	USA	1,97	3	Oklahoma State 	11/10/77	101
+A	2	Keith Van Horn 	USA	2,08	7	Utah '97 	23/10/75	109
+
+MINNESOTA
+
+A	21	Kevin Garnett		USA	2,11	8	Farragut Academy HS	19/5/76		109
+P	34	Michael Olowokandi	NIG	2,13	5	U. of Pacific '98	3/4/75		122
+A	10	Wally Szczerbiak	USA	2,01	4	Miami (Ohio) '99	5/3/77		107
+
+NEW JERSEY
+
+E	24	Richard Jefferson	USA	2,01	2	Arizona '01		21/6/80		101
+B	5	Jason Kidd		USA	1,93	9	California '96		23/3/73		96
+A	10	Zoran Planinic		BOS	2,01	R	Bosnia-Herzegovina	12/9/82		88
+
+NEW ORLEANS
+
+A	2 	Stacey Augmon 		USA	2,03	12	Nevada-Las Vegas '91 	1/8/68 		96
+E 	42 	P.J. Brown	  	USA	2,08	10	Louisiana Tech '92 	14/10/69 	108
+B 	1 	Baron Davis		USA	1,91	4	Louisiana State '99 	13/4/79 	101 
+
+
+NEW YORK
+
+P	55	Dikembe Mutombo		ZAI	2,18	12	Georgetown '91		25/6/66		120
+B	 3	Stephon Marbury		USA	1,88	7	Georgia Tech '96	20/2/77		93
+E	 1	Anfernee Hardaway	USA	2,01	10	Memphis '93		18/7/71		97
+
+ORLANDO
+
+A	 33	Grant Hill	USA	2,03	9	Duke '94			5/10/72		102
+A-P	 5	Juwan Howard	USA	2,06	9	Michigan '95			7/2/73		104
+E	 1	Tracy McGrady	USA	2,03	6	Mount Zion Christian Acad. HS	24/5/79		95
+
+PHILADELPHIA
+
+A-P	 44	Derrick Coleman	USA	2,08	13	Syracuse '90		21/6/67		122
+B	 3	Allen Iverson	USA	1,84	7	Georgetown '98		7/6/75		75
+A	 31	Glenn Robinson	USA	2,01	9	Purdue '94		10/1/73		109
+
+PHOENIX
+
+A-P	 32	Amare Stoudemire	USA	2,08	1	Cypress Creek (Orlando, FL)	16/11/82	111
+A-P	 6	Maciej Lampe		POL	2,11	R	Universidad Complutense '03	5/2/85		109
+P	 43	Jake Voskuhl		USA	2,11	3	Connecticut '00			1/11/77		111
+
+PORTLAND
+
+B	 3	Damon Stoudamire	USA	1,79	8	Arizona '95		3/9/73		78
+P	11	Vladimir Stepania	GEO	2,16	5	Heat '03		8/5/76		116
+A	33	Shareef Abdur-Rahim	USA	2,06	7	California '99		11/12/76	111
+
+SACRAMENTO
+
+P	 21	Vlade Divac		SER	2,13	14	Serbia-Montenegro	3/2/68		118
+A	 16	Predrag Stojakovic	SER	2,07	5	Serbia-Montenegro	9/6/77		104
+A-P	 4	Chris Webber		USA	2,08	10	Michigan '95		1/3/73		111
+
+SAN ANTONIO
+
+A-P	 21	Tim Duncan		USA	2,08	6	Wake Forest '97		25/4/76		118
+E	 20	Emanuel Ginobili	ARG	1,98	1	Argentina		28/7/77		95
+B	 9	Tony Parker		FRA	1,83	2	France			17/5/82		82
+
+SEATTLE
+
+E	 34	Ray Allen		USA	1,97	7	Connecticut '97		20/7/75		93
+E	 31	Brent Barry		USA	1,98	8	Oregon State '95	31/12/71	92
+A-P	 9	Vitaly Potapenko	UCR	2,08	7	Wright State '97	21/3/75		129
+
+TORONTO
+
+B	 20	Alvin Williams	USA	1,96	6	Georgia Tech '06	6/8/74		84
+E	 5	Jalen Rose	USA	2,02	9	Michigan '95		30/1/73		98
+E	 15	Vince Carter	USA	1,96	5	North Carolina '99	26/1/77		102
+
+UTAH
+
+A	 47	Andrei Kirilenko	RUS	2,04	2	Rusia		18/2/81		102
+B	 24	Raul Lopez		ESP	1,83	R	España		15/4/80		73
+P	 00	Greg Ostertag		USA	2,18	8	Kansas '95	6/3/73		127
+
+WASHINGTON
+
+B	 0	Gilbert Arenas		USA	1,89	2	Arizona '03	6/1/82		87
+A	 24	Jarvis Hayes		USA	2,01	R	Georgia '04	9/8/81		100
+A-P	 44	Christian Laettner	USA	2,10	11	Duke '92	17/8/69		111
+

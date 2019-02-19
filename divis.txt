@@ -1,0 +1,10 @@
+load data 
+infile * 
+into table divis
+fields terminated by "|" optionally enclosed by '"'
+(nombre,conferencia,campeon)
+BEGINDATA
+"Pacifico"|"Este"|NULL
+"Central"|"Este"|NULL
+"Medio-Oeste"|"Oeste"|NULL
+"Atlantico"|"Oeste"|NULL

@@ -1,0 +1,95 @@
+load data 
+infile * 
+into table jug 
+fields terminated by "|" optionally enclosed by '"'
+(cd_jug,ind_tipo,puesto_draft,equipo_actual,nombre,nacionalidad,altura,anhos_experiencia,univers,fecha_nac,peso)
+BEGINDATA
+1|2|||"Obinna Ekezie"|"NIG"|206|3||22/8/75|122
+2|0|37||"Travis Hansen"|"USA"|198|0|"Brigham Young"|15/4/78|93
+3|1|||"Zeljko Rebraca"|"SER"|211|2||9/4/72|117
+31|1|||"Jumaine Jones"|"USA"|201|4||10/2/79|99
+32|1|||"Paul Pierce"|"USA"|200|5||13/10/77|104
+33|1|||"Raef LaFrentz"|"USA"|210|5||29/5/76|111
+61|1|||"Tyson Chandler"|"USA"|215|2||2/10/82|106
+62|2|||"Kendall Gill"|"USA"|196|13||25/5/68|98
+63|0|7||"Kirk Hinrich"|"USA"|191|0|"Kansas"|2/1/81|86
+91|1|||"Zydrunas Ilgauskas"|"LIT"|218|5||5/6/75|117
+92|0|1||"LeBron James"|"USA"|203|0|"St. Vincent-St. Mary HS"|30/12/84|108
+93|1|||"Ruben Boumtje Boumtje"|"CAM"|212|2||20/5/78|116
+121|1|||"Shawn Bradley"|"USA"|228|10||22/3/72|124
+122|1|||"Steve Nash"|"CAN"|190|7||7/2/74|88
+123|1|||"Dirk Nowitzki"|"ALE"|211|5||9/6/78|111
+151|0|3||"Carmelo Anthony"|"USA"|203|0|"Syracuse"|29/5/84|100
+152|1|||"Marcus Camby"|"USA"|211|7||22/3/74|102
+153|1|||"Nene Hilario"|"BRA"|207|1||13/9/82|118
+181|0|2||"Darko Milicic"|"SER"|213|0|"Serbia-Montenegro"|20/6/85|111
+182|1|||"Ben Wallace"|"USA"|203|7||10/9/74|109
+183|1|||"Rasheed Wallace"|"USA"|208|8||17/9/74|104
+211|1|||"Evan Eschmeyer"|"USA"|208|4||30/5/75|113
+212|1|||"Popeye Jones"|"USA"|"203"|10||17/6/70|120
+213|1|||"Jason Richardson"|"USA"|198|2||20/1/81|102
+241|1|||"Steve Francis"|"USA"|191|4||21/2/77|91
+242|1|||"Clarence Weatherspoon"|"USA"|201|11||8/9/70|122
+243|1|||"Yao Ming"|"CHI"|226|1||12/9/80|141
+271|1|||"Reggie Miller"|"USA"|201|16||24/8/65|88
+272|1|||"Jermaine O'Neal"|"USA"|211|7||13/10/78|110
+273|1|||"Jamaal Tinsley"|"USA"|191|2||28/2/78|88
+301|1|||"Elton Brand"|"USA"|203|4||11/3/79|120
+302|1|||"Marko Jaric"|"SER"|198|1||12/10/78|98
+303|2|||"Josh Moore"|"USA"|218|0||16/11/80|149
+331|1|||"Kobe Bryant"|"USA"|198|7||23/8/78|100
+332|1|||"Shaquille O'Neal"|"USA"|217|11||6/3/72|154
+333|1|||"Gary Payton"|"USA"|193|13||23/7/68|82
+361|1|||"Pau Gasol"|"ESP"|214|2||6/7/80|109
+362|1|||"Mike Miller"|"USA"|203|3||19/2/80|99
+363|1|||"Jason Williams"|"USA"|186|5||18/11/75|86
+391|2|||"Bimbo Coles"|"USA"|188|13||22/4/68|83
+392|1|||"Lamar Odom"|"USA"|208|4||6/11/79|102
+393|1|||"John Wallace"|"USA"|206|6||9/2/74|102
+421|1|||"Toni Kukoc"|"CRO"|210|10||18/9/68|106
+422|1|||"Desmond Mason"|"USA"|197|3||11/10/77|101
+423|1|||"Keith Van Horn"|"USA"|208|7||23/10/75|109
+451|1|||"Kevin Garnett"|"USA"|211|8||19/5/76|109
+452|1|||"Michael Olowokandi"|"NIG"|213|5||3/4/75|122
+453|1|||"Wally Szczerbiak"|"USA"|201|4||5/3/77|107
+481|1|||"Richard Jefferson"|"USA"|201|2||21/6/80|101
+482|1|||"Jason Kidd"|"USA"|193|9||23/3/73|96
+483|0|22||"Zoran Planinic"|"BOS"|201|0|"Bosnia-Herzegovina"|12/9/82|88
+511|2|||"Stacey Augmon"|"USA"|203|12||1/8/68|96
+512|1|||"P.J. Brown"|"USA"|208|10||14/10/69|108
+513|1|||"Baron Davis"|"USA"|191|4||13/4/79|101
+541|1|||"Dikembe Mutombo"|"ZAI"|218|12||25/6/66|120
+542|1|||"Stephon Marbury"|"USA"|188|7||20/2/77|93
+543|1|||"Anfernee Hardaway"|"USA"|201|10||18/7/71|97
+571|1|||"Grant Hill"|"USA"|203|9||5/10/72|102
+572|1|||"Juwan Howard"|"USA"|206|9||7/2/73|104
+573|1|||"Tracy McGrady"|"USA"|203|6||24/5/79|95
+601|1|||"Derrick Coleman"|"USA"|208|13||21/6/67|122
+602|1|||"Allen Iverson"|"USA"|184|7||7/6/75|75
+603|1|||"Glenn Robinson"|"USA"|201|9||10/1/73|109
+631|1|||"Amare Stoudemire"|"USA"|208|1||16/11/82|111
+632|0|30||"Maciej Lampe"|"POL"|211|0|"Universidad Complutense"|5/2/85|109
+633|1|||"Jake Voskuhl"|"USA"|211|3||1/11/77|111
+661|1|||"Damon Stoudamire"|"USA"|179|8||3/9/73|78
+662|1|||"Vladimir Stepania"|"GEO"|216|5||8/5/76|116
+663|1|||"Shareef Abdur-Rahim"|"USA"|206|7||11/12/76|111
+691|2|||"Vlade Divac"|"SER"|213|14||3/2/68|118
+692|1|||"Predrag Stojakovic"|"SER"|207|5||9/6/77|104
+693|1|||"Chris Webber"|"USA"|208|10||1/3/73|111
+721|1|||"Tim Duncan"|"USA"|208|6||25/4/76|118
+722|2|||"Emanuel Ginobili"|"ARG"|198|1||28/7/77|95
+723|1|||"Tony Parker"|"FRA"|183|2||17/5/82|82
+751|1|||"Ray Allen"|"USA"|197|7||20/7/75|93
+752|2|||"Brent Barry"|"USA"|198|8||31/12/71|92
+753|1|||"Vitaly Potapenko"|"UCR"|208|7||21/3/75|129
+781|1|||"Alvin Williams"|"USA"|196|6||6/8/74|84
+782|1|||"Jalen Rose"|"USA"|202|9||30/1/73|98
+783|1|||"Vince Carter"|"USA"|196|5||26/1/77|102
+811|1|||"Andrei Kirilenko"|"RUS"|204|2||18/2/81|102
+812|0|24||"Raul Lopez"|"ESP"|183|0|"España"|15/4/80|73
+813|2|||"Greg Ostertag"|"USA"|218|8||6/3/73|127
+841|1|||"Gilbert Arenas"|"USA"|189|2||6/1/82|87
+842|0|10||"Jarvis Hayes"|"USA"|201|0|"Georgia"|9/8/81|100
+843|1|||"Christian Laettner"|"USA"|210|11||17/8/69|111
+1001|3||"Estudiantes"|"Felipe Reyes"|"ESP"|201|||16/3/80|100
+1002|3||"Connecticut"|"Emeka Okafor"|"USA"|210|||28/9/82|115

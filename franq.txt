@@ -1,0 +1,35 @@
+load data 
+infile * 
+into table franq 
+fields terminated by "|" optionally enclosed by '"'
+(cd_franq,nombre,ciudad,cd_pab,nom_div)
+BEGINDATA
+1|"Atlanta Hawks"|"Atlanta"|1|"Central"
+2|"Boston Celtics"|"Boston"|2|"Atlantico"
+3|"Chicago Bulls"|"Chicago"|3|"Central"
+4|"Cleveland Cavaliers"|"Cleveland"|4|"Central"
+5|"Dallas Mavericks"|"Dallas"|5|"Medio-Oeste"
+6|"Denver Nuggets"|"Denver"|6|"Medio-Oeste"
+7|"Detroit Pistons"|"Auburn Hills"|7|"Central"
+8|"Golden State Warriors"|"Oakland"|8|"Pacifico"
+9|"Houston Rockets"|"Houston"|9|"Medio-Oeste"
+10|"Indiana Pacers"|"Indianapolis"|10|"Central"
+11|"Los Angeles Clippers"|"Los Angeles"|11|"Pacifico"
+12|"Los Angeles Lakers"|"Los Angeles"|11|"Pacifico"
+13|"Memphis Grizzlies"|"Memphis"|12|"Medio-Oeste"
+14|"Miami Heat"|"Miami"|13|"Atlantico"
+15|"Milwaukee Bucks"|"Milwaukee"|14|"Central"
+16|"Minnesota Timberwolves"|"Minneapolis"|15|"Medio-Oeste"
+17|"New Jersey Nets"|"East Rutherford"|16|"Atlantico"
+18|"New Orleans Hornets"|"New Orleans"|17|"Central"
+19|"New York Knicks"|"New York"|18|"Atlantico"
+20|"Orlando Magic"|"Orlando"|19|"Atlantico"
+21|"Philadelphia 76ers"|"Philadelphia"|20|"Atlantico"
+22|"Phoenix Suns"|"Phoenix"|21|"Medio-Oeste"
+23|"Portland Trail Blazers"|"Portland"|22|"Pacifico"
+24|"Sacramento Kings"|"Sacramento"|23|"Pacifico"
+25|"San Antonio Spurs"|"San Antonio"|24|"Medio-Oeste"
+26|"Seattle Supersonics"|"Seattle"|25|"Pacifico"
+27|"Toronto Raptors"|"Toronto"|26|"Central"
+28|"Utah Jazz"|"Salt Lake City"|27|"Medio-Oeste"
+29|"Washington Wizards"|"Washington D.C."|28|"Atlantico"
